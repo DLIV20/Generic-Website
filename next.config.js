@@ -5,12 +5,13 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**',
+        hostname: 'localhost',
+      },
+      {
+        protocol: 'https',
+        hostname: 'vercel.com',
       },
     ],
-  },
-  env: {
-    NEXT_PUBLIC_SITE_NAME: 'Business Name',
   },
 };
 
