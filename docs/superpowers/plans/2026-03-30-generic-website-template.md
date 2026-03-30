@@ -199,10 +199,14 @@ module.exports = {
 };
 ```
 
-- [ ] **Step 3: Create src/styles/globals.css with CSS variables**
+- [ ] **Step 3: Create src/styles/globals.css with CSS variables and Tailwind**
 
 ```css
 /* src/styles/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --color-primary: #2563eb;
   --color-secondary: #1e40af;
@@ -224,11 +228,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #1f2937;
 }
 
 a {
   color: var(--color-primary);
   text-decoration: none;
+  transition: color 0.2s;
 }
 
 a:hover {
@@ -238,6 +244,23 @@ a:hover {
 img {
   max-width: 100%;
   height: auto;
+}
+
+/* Tailwind color reference */
+.primary {
+  color: var(--color-primary);
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.secondary {
+  color: var(--color-secondary);
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary);
 }
 ```
 
@@ -742,7 +765,7 @@ git commit -m "feat: add Footer component"
 **Files:**
 - Create: `src/components/ContactForm.jsx`
 
-- [ ] **Step 1: Create ContactForm component**
+- [ ] **Step 1: Create ContactForm component with better error handling**
 
 ```jsx
 // src/components/ContactForm.jsx
@@ -755,7 +778,8 @@ export default function ContactForm() {
     phone: '',
     message: '',
   });
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState(''); // 'success' or 'error'
+  const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
@@ -769,6 +793,7 @@ export default function ContactForm() {
     e.preventDefault();
     setLoading(true);
     setStatus('');
+    setErrorMessage('');
 
     try {
       const res = await fetch('/api/contact', {
@@ -777,15 +802,19 @@ export default function ContactForm() {
         body: JSON.stringify(formData),
       });
 
+      const data = await res.json();
+
       if (res.ok) {
         setStatus('success');
         setFormData({ name: '', email: '', phone: '', message: '' });
         setTimeout(() => setStatus(''), 5000);
       } else {
         setStatus('error');
+        setErrorMessage(data.error || 'Failed to send message. Please try again.');
       }
     } catch (error) {
       setStatus('error');
+      setErrorMessage('Network error. Please check your connection and try again.');
     } finally {
       setLoading(false);
     }
@@ -844,10 +873,14 @@ export default function ContactForm() {
         {loading ? 'Sending...' : 'Send Message'}
       </button>
       {status === 'success' && (
-        <p className="text-green-600 text-center">Message sent successfully!</p>
+        <p className="text-green-600 text-center font-semibold">
+          ✓ Message sent successfully! We'll be in touch soon.
+        </p>
       )}
       {status === 'error' && (
-        <p className="text-red-600 text-center">Error sending message. Please try again.</p>
+        <p className="text-red-600 text-center font-semibold">
+          ✕ {errorMessage}
+        </p>
       )}
     </form>
   );
@@ -869,28 +902,75 @@ git commit -m "feat: add ContactForm component with validation"
 
 ## Phase 4: Pages & Layout
 
+### Task 11.5: Create 404 Error Page
+
+**Files:**
+- Create: `src/pages/404.jsx`
+
+- [ ] **Step 1: Create 404 page**
+
+```jsx
+// src/pages/404.jsx
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import Link from 'next/link';
+
+export default function NotFound() {
+  return (
+    <>
+      <Navbar />
+      <section className="py-20 flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-6xl font-bold text-primary mb-4">404</h1>
+          <h2 className="text-3xl font-bold mb-4">Page Not Found</h2>
+          <p className="text-gray-600 mb-8">
+            Sorry, the page you're looking for doesn't exist.
+          </p>
+          <Link
+            href="/"
+            className="inline-block bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:bg-secondary transition"
+          >
+            Go Home
+          </Link>
+        </div>
+      </section>
+      <Footer />
+    </>
+  );
+}
+```
+
+- [ ] **Step 2: Commit**
+
+```bash
+git add src/pages/404.jsx
+git commit -m "feat: add 404 error page"
+```
+
+---
+
 ### Task 12: Create _app.jsx & _document.jsx
 
 **Files:**
 - Create: `src/pages/_app.jsx`
 - Create: `src/pages/_document.jsx`
 
-- [ ] **Step 1: Create _app.jsx**
+- [ ] **Step 1: Create _app.jsx with CSS variable initialization**
 
 ```jsx
 // src/pages/_app.jsx
 import '../styles/globals.css';
+import { useEffect } from 'react';
 import config from '../data/config.json';
 
 export default function App({ Component, pageProps }) {
-  return (
-    <div style={{
-      '--color-primary': config.primaryColor,
-      '--color-secondary': config.secondaryColor,
-    }}>
-      <Component {...pageProps} />
-    </div>
-  );
+  useEffect(() => {
+    // Set CSS variables from config
+    document.documentElement.style.setProperty('--color-primary', config.primaryColor);
+    document.documentElement.style.setProperty('--color-secondary', config.secondaryColor);
+  }, []);
+
+  return <Component {...pageProps} />;
 }
 ```
 
@@ -1389,11 +1469,33 @@ SMTP_FROM=contact@yourdomain.com
 CONTACT_EMAIL_TO=your-email@gmail.com
 ```
 
-- [ ] **Step 2: Create contact API endpoint**
+- [ ] **Step 2: Create email validation utility**
+
+```javascript
+// src/utils/validateEmail.js
+export function validateEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email) && email.length <= 254;
+}
+
+export function escapeHtml(text) {
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;',
+  };
+  return text.replace(/[&<>"']/g, (m) => map[m]);
+}
+```
+
+- [ ] **Step 3: Create contact API endpoint with security fixes**
 
 ```javascript
 // src/pages/api/contact.js
 import nodemailer from 'nodemailer';
+import { validateEmail, escapeHtml } from '../../utils/validateEmail';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -1407,8 +1509,16 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
-  if (!email.includes('@')) {
+  if (typeof name !== 'string' || name.trim().length === 0) {
+    return res.status(400).json({ error: 'Invalid name' });
+  }
+
+  if (!validateEmail(email)) {
     return res.status(400).json({ error: 'Invalid email' });
+  }
+
+  if (typeof message !== 'string' || message.trim().length === 0) {
+    return res.status(400).json({ error: 'Invalid message' });
   }
 
   try {
@@ -1422,17 +1532,22 @@ export default async function handler(req, res) {
       },
     });
 
+    // Sanitize inputs to prevent XSS
+    const sanitizedName = escapeHtml(name.trim());
+    const sanitizedPhone = phone ? escapeHtml(phone.trim()) : 'Not provided';
+    const sanitizedMessage = escapeHtml(message.trim()).replace(/\n/g, '<br>');
+
     const mailOptions = {
       from: process.env.SMTP_FROM,
       to: process.env.CONTACT_EMAIL_TO,
-      subject: `New Contact Form Submission from ${name}`,
+      subject: `New Contact Form Submission from ${sanitizedName}`,
       html: `
         <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
+        <p><strong>Name:</strong> ${sanitizedName}</p>
+        <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+        <p><strong>Phone:</strong> ${sanitizedPhone}</p>
         <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, '<br>')}</p>
+        <p>${sanitizedMessage}</p>
       `,
       replyTo: email,
     };
@@ -1447,18 +1562,45 @@ export default async function handler(req, res) {
 }
 ```
 
-- [ ] **Step 3: Test API endpoint locally**
+- [ ] **Step 3: Test API endpoint with Mailtrap (free email testing)**
 
-Create a `.env.local` file with test SMTP credentials
-Run: `npm run dev`
-Use Postman or `curl` to test:
+1. Sign up for free account at [mailtrap.io](https://mailtrap.io)
+2. Get SMTP credentials from Mailtrap dashboard (Integration → Nodemailer)
+3. Create `.env.local` with Mailtrap credentials:
+   ```
+   SMTP_HOST=sandbox.smtp.mailtrap.io
+   SMTP_PORT=2525
+   SMTP_USER=your_mailtrap_user
+   SMTP_PASS=your_mailtrap_pass
+   SMTP_FROM=test@example.com
+   CONTACT_EMAIL_TO=your_mailtrap_inbox@example.com
+   ```
+
+4. Run dev server: `npm run dev`
+5. Test with curl:
+   ```bash
+   curl -X POST http://localhost:3000/api/contact \
+     -H "Content-Type: application/json" \
+     -d '{"name":"Test User","email":"test@example.com","phone":"555-1234","message":"Test message"}'
+   ```
+
+Expected: 200 response with `{"success": true, "message": "Email sent successfully"}`
+Check Mailtrap inbox to verify email was delivered
+
+- [ ] **Step 4: Test form validation**
+
+Run these curl tests to verify validation catches errors:
 ```bash
-curl -X POST http://localhost:3000/api/contact \
-  -H "Content-Type: application/json" \
-  -d '{"name":"Test","email":"test@example.com","phone":"555-1234","message":"Test message"}'
+# Missing name
+curl -X POST http://localhost:3000/api/contact -H "Content-Type: application/json" -d '{"email":"test@example.com","message":"test"}'
+# Expected: 400 with error
+
+# Invalid email
+curl -X POST http://localhost:3000/api/contact -H "Content-Type: application/json" -d '{"name":"Test","email":"invalid","message":"test"}'
+# Expected: 400 with error
 ```
 
-Expected: 200 response with `{success: true}`
+Expected: All return 400 errors as expected
 
 - [ ] **Step 4: Commit**
 
