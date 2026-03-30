@@ -1,0 +1,9 @@
+[
+  {
+    "id": 1,
+    "name": "Team Member Name",
+    "title": "Role/Title",
+    "bio": "Short bio about this team member",
+    "image": "/team/member1.jpg"
+  }
+]

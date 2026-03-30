@@ -1,0 +1,9 @@
+{
+  "about": {
+    "title": "About Us",
+    "content": "Your business story and mission here.",
+    "image": "/about-image.jpg"
+  },
+  "mission": "Our mission statement",
+  "values": ["Value 1", "Value 2", "Value 3"]
+}

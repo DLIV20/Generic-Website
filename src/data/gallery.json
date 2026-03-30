@@ -1,0 +1,10 @@
+[
+  {
+    "id": 1,
+    "title": "Project Name",
+    "description": "Brief description",
+    "before": "/gallery/before1.jpg",
+    "after": "/gallery/after1.jpg",
+    "category": "category1"
+  }
+]

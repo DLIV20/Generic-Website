@@ -1,0 +1,24 @@
+{
+  "businessName": "Your Business Name",
+  "tagline": "Your business tagline here",
+  "description": "A brief description of your business",
+  "primaryColor": "#2563eb",
+  "secondaryColor": "#1e40af",
+  "phone": "555-1234",
+  "email": "contact@business.com",
+  "address": "123 Main St, City, State 12345",
+  "hours": {
+    "monday": "9am - 5pm",
+    "tuesday": "9am - 5pm",
+    "wednesday": "9am - 5pm",
+    "thursday": "9am - 5pm",
+    "friday": "9am - 5pm",
+    "saturday": "10am - 3pm",
+    "sunday": "Closed"
+  },
+  "socialLinks": {
+    "facebook": "https://facebook.com",
+    "instagram": "https://instagram.com",
+    "linkedin": "https://linkedin.com"
+  }
+}

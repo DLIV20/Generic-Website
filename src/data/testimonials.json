@@ -1,0 +1,10 @@
+[
+  {
+    "id": 1,
+    "name": "Client Name",
+    "company": "Company Name",
+    "text": "This is a testimonial from a satisfied client.",
+    "rating": 5,
+    "image": "/testimonials/client1.jpg"
+  }
+]

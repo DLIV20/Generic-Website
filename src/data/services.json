@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "Service One",
+    "description": "Description of service one",
+    "icon": "star",
+    "image": "/services/service1.jpg",
+    "featured": true
+  },
+  {
+    "id": 2,
+    "name": "Service Two",
+    "description": "Description of service two",
+    "icon": "check",
+    "image": "/services/service2.jpg",
+    "featured": true
+  }
+]
