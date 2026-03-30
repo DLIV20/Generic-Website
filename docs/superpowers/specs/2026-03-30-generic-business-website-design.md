@@ -126,7 +126,6 @@ When cloning the template for a new client:
 - **Contact Form** — Collects submissions, emails to business owner
 - **SEO Ready** — Meta tags, structured data, sitemap, robots.txt
 - **Image Optimization** — Next.js Image component for fast loading
-- **Dark Mode** (optional for MVP) — Theme toggle
 - **Analytics Ready** — Easy to integrate Google Analytics or similar
 - **Appointment Booking** (optional) — Calendly embed or link (can upgrade to full integration later)
 
@@ -176,6 +175,71 @@ When cloning the template for a new client:
 - Push to main template repo
 - Notify clients of updates via email
 - Clients can choose to merge updates or stay on their version (git branches)
+
+---
+
+## Client Onboarding & Configuration
+
+### Image/Asset Management Workflow
+
+Each client project includes a `CUSTOMER_ONBOARDING.md` guide with this process:
+
+1. **Client provides assets** → Email or shared folder (logo, hero image, gallery images)
+2. **You optimize images** → Resize/compress using a standard tool (e.g., ImageMagick or sharp utility)
+3. **Add to repo** → Place in `public/` folder with clear naming convention
+4. **Update JSON references** → Add image paths to config.json, gallery.json, etc.
+5. **Test locally** → Verify images render correctly
+6. **Deploy** → Push to GitHub, Vercel auto-deploys
+
+**Image Specs:**
+- Logo: 200x200px minimum, PNG with transparency preferred
+- Hero image: 1920x600px (or responsive aspect ratio)
+- Gallery images: 800x600px or larger (Next.js Image component handles scaling)
+- Max file size: 500KB per image (compress before adding)
+
+### Environment Variables & Email Configuration
+
+Contact form submissions require SMTP credentials to email the business owner. Each client repo includes:
+
+**`.env.local.example`** (template for client to copy):
+```
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your-email@gmail.com
+SMTP_PASS=your-app-password
+SMTP_FROM=contact@yourdomain.com
+CONTACT_EMAIL_TO=business-owner@email.com
+```
+
+**Configuration per client:**
+1. Client (or you) generates SMTP credentials (Gmail app password, SendGrid key, etc.)
+2. Client sets these in Vercel dashboard under "Settings → Environment Variables"
+3. Each Vercel deployment auto-loads these without exposing them in code
+4. You maintain a master list of which clients use which email providers for reference
+
+**Security Note:** Never commit `.env.local` to git. Only `.env.local.example` is in the repo.
+
+### Client Onboarding Checklist
+
+Before deploying a new client site, collect:
+
+- [ ] Business name, tagline, phone, email, address
+- [ ] Business hours (each day of week)
+- [ ] Logo and hero image
+- [ ] List of services/products with descriptions
+- [ ] 2-3 testimonials (with customer name/photo if available)
+- [ ] Team members (names, titles, bios, photos)
+- [ ] Gallery images (before/after or work samples)
+- [ ] Preferred primary/secondary colors (or you suggest)
+- [ ] SMTP credentials for contact form (or they'll set in Vercel)
+- [ ] Preferred domain name (or you provide Vercel URL)
+
+**Deliverables to Client:**
+- Live URL (Vercel link or custom domain)
+- GitHub repo access (if they want to manage it)
+- Vercel login credentials (if they manage deployments)
+- `CUSTOMER_ONBOARDING.md` guide (how to edit content, where images go, how to deploy updates)
+- Monthly invoice/payment instructions
 
 ---
 
