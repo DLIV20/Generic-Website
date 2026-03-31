@@ -4,13 +4,13 @@
   "installCommand": "npm ci",
   "framework": "nextjs",
   "outputDirectory": ".next",
-  "env": [
-    "SMTP_HOST",
-    "SMTP_PORT",
-    "SMTP_USER",
-    "SMTP_PASS",
-    "SMTP_FROM",
-    "CONTACT_EMAIL_TO",
-    "NEXT_PUBLIC_SITE_NAME"
-  ]
+  "env": {
+    "SMTP_HOST": "@smtp_host",
+    "SMTP_PORT": "@smtp_port",
+    "SMTP_USER": "@smtp_user",
+    "SMTP_PASS": "@smtp_pass",
+    "SMTP_FROM": "@smtp_from",
+    "CONTACT_EMAIL_TO": "@contact_email_to",
+    "NEXT_PUBLIC_SITE_NAME": "@next_public_site_name"
+  }
 }
