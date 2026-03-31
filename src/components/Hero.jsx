@@ -4,24 +4,19 @@ import config from '../data/config.json';
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen md:min-h-[90vh] flex items-center justify-center overflow-hidden" style={{ backgroundColor: '#f6f6f6' }}>
-      <div className="absolute right-0 top-0 w-1/2 h-full opacity-20 md:opacity-30 z-0">
-        <Image src="/hero.jpg" alt="Hero" fill className="object-cover" />
-      </div>
+    <section className="relative h-screen flex items-center justify-center bg-cover bg-center" style={{ backgroundImage: 'url(/hero.jpg)', backgroundPosition: 'center' }}>
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black opacity-40"></div>
 
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 md:px-12 py-12 md:py-0">
-        <h1 className="text-4xl md:text-5xl font-black mb-4 leading-tight" style={{ fontFamily: 'var(--font-display)', color: 'var(--color-text)' }}>
+      <div className="relative z-10 max-w-4xl mx-auto px-4 text-center text-white">
+        <h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
           {config.businessName}
-          <br />
-          <span style={{ background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-            Transforms Spaces
-          </span>
         </h1>
-        <p className="text-lg md:text-xl mb-8 max-w-2xl" style={{ color: 'var(--color-text-light)', lineHeight: '1.6' }}>
+        <p className="text-xl md:text-2xl mb-10 max-w-2xl mx-auto opacity-95" style={{ fontFamily: 'var(--font-body)' }}>
           {config.tagline}
         </p>
-        <Link href="/contact" className="inline-block px-8 py-4 rounded-lg font-semibold text-white transition hover:-translate-y-1" style={{ backgroundColor: 'var(--color-primary)' }}>
-          Get Started Today
+        <Link href="/contact" className="inline-block btn btn-solid text-white border-white px-10 py-4 text-lg font-bold" style={{ borderColor: 'white', backgroundColor: 'var(--color-primary)', color: 'white' }}>
+          Get Started
         </Link>
       </div>
     </section>

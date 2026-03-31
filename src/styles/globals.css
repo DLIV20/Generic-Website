@@ -1,24 +1,24 @@
-/* Earthscapes-inspired Design System */
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Poppins:wght@400;500;600;700&display=swap');
+/* Southern Turf Inspired Design System */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Playfair+Display:wght@600;700;900&display=swap');
 @import "tailwindcss";
 
 :root {
   /* Warm earth tones */
-  --color-primary: #d97553;
-  --color-secondary: #363e32;
-  --color-accent: #8b9d83;
-  --color-light-bg: #f6f6f6;
+  --color-primary: #a27329;
+  --color-secondary: #a25f29;
+  --color-accent: #c9a760;
+  --color-light-bg: #f8f0e2;
   --color-white: #ffffff;
-  --color-text: #272727;
-  --color-text-light: #5a5a5a;
+  --color-text: #333333;
+  --color-text-light: #666666;
 
   /* Typography */
-  --font-display: 'Merriweather', serif;
-  --font-body: 'Poppins', sans-serif;
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Lato', sans-serif;
 
   /* Spacing & Transitions */
-  --radius: 12px;
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --radius: 8px;
+  --transition: all 0.3s ease;
 }
 
 * {
@@ -36,7 +36,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--color-text);
-  background: var(--color-light-bg);
+  background: white;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -46,9 +46,10 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-text);
 }
 
-h1 { font-size: 3.5rem; }
-h2 { font-size: 2.5rem; }
-h3 { font-size: 1.75rem; }
+h1 { font-size: 3.5rem; font-weight: 900; }
+h2 { font-size: 2.8rem; font-weight: 700; }
+h3 { font-size: 1.75rem; font-weight: 700; }
+h4 { font-size: 1.3rem; font-weight: 700; }
 
 a {
   color: var(--color-primary);
@@ -63,7 +64,6 @@ a:hover {
 img {
   max-width: 100%;
   height: auto;
-  border-radius: var(--radius);
 }
 
 /* Utility classes */
@@ -83,12 +83,38 @@ img {
   background-color: var(--color-secondary);
 }
 
-.text-accent {
-  color: var(--color-accent);
+.bg-cream {
+  background-color: var(--color-light-bg);
 }
 
-.bg-accent {
-  background-color: var(--color-accent);
+/* Button Styles */
+.btn {
+  display: inline-block;
+  padding: 12px 32px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: var(--transition);
+  text-decoration: none;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  background: transparent;
+}
+
+.btn:hover {
+  background: var(--color-primary);
+  color: white;
+}
+
+.btn-solid {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.btn-solid:hover {
+  background: var(--color-secondary);
+  border-color: var(--color-secondary);
 }
 
 /* Smooth transitions */
@@ -96,77 +122,17 @@ button, a, .transition-smooth {
   transition: var(--transition);
 }
 
-/* Animated decorative leaf */
-@keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-10px) rotate(5deg); }
-}
-
-.leaf-accent {
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes slideInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.animate-slide-down {
-  animation: slideInDown 0.6s ease-out forwards;
 }
 
 .animate-fade-up {
   animation: fadeInUp 0.6s ease-out forwards;
-}
-
-/* Component styles */
-.page-title {
-  font-family: var(--font-display);
-  font-size: 3rem;
-  font-weight: 900;
-  color: var(--color-text);
-  margin-bottom: 2rem;
-}
-
-.page-subtitle {
-  font-size: 1.125rem;
-  color: var(--color-text-light);
-  text-align: center;
-  max-width: 600px;
-  margin: 0 auto 4rem;
-  line-height: 1.6;
-}
-
-.cta-button {
-  background: var(--color-primary);
-  color: white;
-  display: inline-block;
-  padding: 12px 32px;
-  border-radius: var(--radius);
-  font-weight: 600;
-  transition: all 0.3s ease;
-  text-decoration: none;
-}
-
-.cta-button:hover {
-  background: var(--color-secondary);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(217, 117, 83, 0.2);
 }
