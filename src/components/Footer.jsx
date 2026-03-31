@@ -5,42 +5,136 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-white py-12">
-      <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-8 mb-8">
-        <div>
-          <h3 className="font-bold text-lg mb-4">{config.businessName}</h3>
-          <p className="text-gray-400">{config.tagline}</p>
+    <style>{`
+      .footer {
+        background: var(--color-secondary);
+        color: white;
+      }
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2.5rem;
+        margin-bottom: 2rem;
+      }
+      .footer-section h3, .footer-section h4 {
+        font-family: var(--font-display);
+        color: white;
+      }
+      .footer-section h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .footer-section h4 {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+      .footer-tagline {
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.6;
+      }
+      .footer-link {
+        color: rgba(255, 255, 255, 0.7);
+        transition: all 0.3s ease;
+        display: inline-block;
+        position: relative;
+      }
+      .footer-link::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--color-primary);
+        transition: width 0.3s ease;
+      }
+      .footer-link:hover {
+        color: white;
+      }
+      .footer-link:hover::after {
+        width: 100%;
+      }
+      .footer-divider {
+        border-top: 2px solid rgba(255, 255, 255, 0.1);
+        padding-top: 2rem;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.6);
+      }
+      .footer-contact-info {
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 0.75rem;
+      }
+    `}</style>
+
+    <footer className="footer py-16">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="footer-content">
+          {/* Brand Section */}
+          <div className="footer-section">
+            <h3>{config.businessName}</h3>
+            <p className="footer-tagline">{config.tagline}</p>
+          </div>
+
+          {/* Quick Links */}
+          <div className="footer-section">
+            <h4>Navigate</h4>
+            <ul className="space-y-3">
+              <li>
+                <Link href="/services" className="footer-link text-sm">
+                  Services
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="footer-link text-sm">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link href="/portfolio" className="footer-link text-sm">
+                  Portfolio
+                </Link>
+              </li>
+              <li>
+                <Link href="/team" className="footer-link text-sm">
+                  Team
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="footer-link text-sm">
+                  Contact
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div className="footer-section">
+            <h4>Get In Touch</h4>
+            <p className="footer-contact-info text-sm mb-3">
+              <strong>Phone:</strong>
+              <br />
+              <a href={`tel:${config.phone}`} className="footer-link">
+                {config.phone}
+              </a>
+            </p>
+            <p className="footer-contact-info text-sm">
+              <strong>Email:</strong>
+              <br />
+              <a href={`mailto:${config.email}`} className="footer-link">
+                {config.email}
+              </a>
+            </p>
+          </div>
         </div>
-        <div>
-          <h4 className="font-semibold mb-4">Quick Links</h4>
-          <ul className="space-y-2 text-gray-400">
-            <li>
-              <Link href="/services" className="hover:text-white">
-                Services
-              </Link>
-            </li>
-            <li>
-              <Link href="/about" className="hover:text-white">
-                About
-              </Link>
-            </li>
-            <li>
-              <Link href="/contact" className="hover:text-white">
-                Contact
-              </Link>
-            </li>
-          </ul>
+
+        {/* Footer Bottom */}
+        <div className="footer-divider">
+          <p className="text-sm">
+            &copy; {currentYear} {config.businessName}. All rights reserved. | Made with care by{' '}
+            <span style={{ color: 'var(--color-primary)' }}>Your Team</span>
+          </p>
         </div>
-        <div>
-          <h4 className="font-semibold mb-4">Contact</h4>
-          <p className="text-gray-400 mb-2">{config.phone}</p>
-          <p className="text-gray-400">{config.email}</p>
-        </div>
-      </div>
-      <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-        <p>
-          &copy; {currentYear} {config.businessName}. All rights reserved.
-        </p>
       </div>
     </footer>
   );
