@@ -135,3 +135,38 @@ button, a, .transition-smooth {
 .animate-fade-up {
   animation: fadeInUp 0.6s ease-out forwards;
 }
+
+/* Component styles */
+.page-title {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--color-text);
+  margin-bottom: 2rem;
+}
+
+.page-subtitle {
+  font-size: 1.125rem;
+  color: var(--color-text-light);
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 4rem;
+  line-height: 1.6;
+}
+
+.cta-button {
+  background: var(--color-primary);
+  color: white;
+  display: inline-block;
+  padding: 12px 32px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.cta-button:hover {
+  background: var(--color-secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(217, 117, 83, 0.2);
+}
