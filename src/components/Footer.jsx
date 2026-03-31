@@ -1,71 +1,74 @@
 import Link from 'next/link';
 import config from '../data/config.json';
 
+const footerStyles = `
+  .footer {
+    background: var(--color-secondary);
+    color: white;
+  }
+  .footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 2rem;
+  }
+  .footer-section h3, .footer-section h4 {
+    font-family: var(--font-display);
+    color: white;
+  }
+  .footer-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .footer-section h4 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  .footer-tagline {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+  }
+  .footer-link {
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.3s ease;
+    display: inline-block;
+    position: relative;
+  }
+  .footer-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-primary);
+    transition: width 0.3s ease;
+  }
+  .footer-link:hover {
+    color: white;
+  }
+  .footer-link:hover::after {
+    width: 100%;
+  }
+  .footer-divider {
+    border-top: 2px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .footer-contact-info {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.75rem;
+  }
+`;
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <style>{`
-      .footer {
-        background: var(--color-secondary);
-        color: white;
-      }
-      .footer-content {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 2.5rem;
-        margin-bottom: 2rem;
-      }
-      .footer-section h3, .footer-section h4 {
-        font-family: var(--font-display);
-        color: white;
-      }
-      .footer-section h3 {
-        font-size: 1.5rem;
-        margin-bottom: 0.5rem;
-      }
-      .footer-section h4 {
-        font-size: 1.1rem;
-        margin-bottom: 1rem;
-        font-weight: 600;
-      }
-      .footer-tagline {
-        color: rgba(255, 255, 255, 0.7);
-        line-height: 1.6;
-      }
-      .footer-link {
-        color: rgba(255, 255, 255, 0.7);
-        transition: all 0.3s ease;
-        display: inline-block;
-        position: relative;
-      }
-      .footer-link::after {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: var(--color-primary);
-        transition: width 0.3s ease;
-      }
-      .footer-link:hover {
-        color: white;
-      }
-      .footer-link:hover::after {
-        width: 100%;
-      }
-      .footer-divider {
-        border-top: 2px solid rgba(255, 255, 255, 0.1);
-        padding-top: 2rem;
-        text-align: center;
-        color: rgba(255, 255, 255, 0.6);
-      }
-      .footer-contact-info {
-        color: rgba(255, 255, 255, 0.8);
-        margin-bottom: 0.75rem;
-      }
-    `}</style>
+    <>
+      <style>{footerStyles}</style>
 
     <footer className="footer py-16">
       <div className="max-w-6xl mx-auto px-4">
@@ -137,5 +140,6 @@ export default function Footer() {
         </div>
       </div>
     </footer>
+    </>
   );
 }
