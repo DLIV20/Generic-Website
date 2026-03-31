@@ -8,8 +8,7 @@ export default function Navbar() {
   return (
     <nav className="bg-white sticky top-0 z-50 shadow-sm">
       <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-        {/* Logo */}
-        <Link href="/" className="text-2xl font-black" style={{ color: 'var(--color-primary)', fontFamily: 'var(--font-display)' }}>
+        <Link href="/" className="text-2xl font-black primary-color" style={{ fontFamily: "'Playfair Display', serif" }}>
           {config.businessName}
         </Link>
 

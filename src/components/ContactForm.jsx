@@ -1,77 +1,5 @@
 import { useState } from 'react';
 
-const formStyles = `
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  .form-group {
-    display: flex;
-    flex-direction: column;
-  }
-  .form-label {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--color-text);
-    margin-bottom: 0.5rem;
-  }
-  .form-input,
-  .form-textarea {
-    padding: 0.75rem 1rem;
-    border: 2px solid #e5e5e5;
-    border-radius: var(--radius);
-    font-family: var(--font-body);
-    font-size: 1rem;
-    color: var(--color-text);
-    transition: all 0.3s ease;
-  }
-  .form-input:focus,
-  .form-textarea:focus {
-    outline: none;
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(217, 117, 83, 0.1);
-  }
-  .form-textarea {
-    resize: vertical;
-    min-height: 150px;
-  }
-  .submit-button {
-    background: var(--color-primary);
-    color: white;
-    padding: 0.75rem 2rem;
-    border: none;
-    border-radius: var(--radius);
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  .submit-button:hover:not(:disabled) {
-    background: var(--color-secondary);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(217, 117, 83, 0.2);
-  }
-  .submit-button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-  .status-message {
-    text-align: center;
-    padding: 1rem;
-    border-radius: var(--radius);
-    font-weight: 600;
-  }
-  .status-success {
-    background: #d1fae5;
-    color: #065f46;
-  }
-  .status-error {
-    background: #fee2e2;
-    color: #991b1b;
-  }
-`;
-
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: '',
@@ -122,9 +50,7 @@ export default function ContactForm() {
   };
 
   return (
-    <>
-      <style>{formStyles}</style>
-      <form onSubmit={handleSubmit} className="contact-form">
+    <form onSubmit={handleSubmit} className="contact-form">
         <div className="form-group">
           <label className="form-label">Name</label>
           <input
@@ -185,6 +111,5 @@ export default function ContactForm() {
           </p>
         )}
       </form>
-    </>
   );
 }

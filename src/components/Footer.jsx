@@ -5,12 +5,12 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer style={{ backgroundColor: 'var(--color-text)' }} className="text-white py-16">
+    <footer className="bg-gray-900 text-white py-16">
       <div className="max-w-6xl mx-auto px-4">
         <div className="grid md:grid-cols-3 gap-12 mb-12">
           {/* Brand */}
           <div>
-            <h3 className="text-2xl font-bold mb-3" style={{ fontFamily: 'var(--font-display)', color: 'var(--color-accent)' }}>
+            <h3 className="text-2xl font-bold mb-3 primary-color" style={{ fontFamily: "'Playfair Display', serif" }}>
               {config.businessName}
             </h3>
             <p className="text-gray-300 text-sm leading-relaxed">

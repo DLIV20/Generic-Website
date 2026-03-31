@@ -14,14 +14,14 @@ export default function Home() {
       <Hero />
 
       {/* Services Section */}
-      <section className="py-20" style={{ backgroundColor: 'var(--color-light-bg)' }}>
+      <section className="py-20 bg-cream">
         <div className="max-w-6xl mx-auto px-4">
           {/* Header */}
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold mb-4" style={{ fontFamily: 'var(--font-display)', color: 'var(--color-primary)' }}>
+            <h2 className="text-5xl font-bold mb-4 primary-color">
               Our Services
             </h2>
-            <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--color-text-light)' }}>
+            <p className="text-lg max-w-2xl mx-auto text-light">
               Comprehensive solutions tailored to your needs
             </p>
           </div>
@@ -35,7 +35,7 @@ export default function Home() {
 
           {/* CTA */}
           <div className="text-center">
-            <Link href="/services" className="btn border-2" style={{ borderColor: 'var(--color-primary)', color: 'var(--color-primary)' }}>
+            <Link href="/services" className="btn border-2 border-primary primary-color">
               View All Services
             </Link>
           </div>
@@ -48,10 +48,10 @@ export default function Home() {
           <div className="max-w-6xl mx-auto px-4">
             {/* Header */}
             <div className="text-center mb-16">
-              <h2 className="text-5xl font-bold mb-4" style={{ fontFamily: 'var(--font-display)', color: 'var(--color-primary)' }}>
+              <h2 className="text-5xl font-bold mb-4 primary-color">
                 What Our Clients Say
               </h2>
-              <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--color-text-light)' }}>
+              <p className="text-lg max-w-2xl mx-auto text-light">
                 Trusted by satisfied customers
               </p>
             </div>
@@ -65,7 +65,7 @@ export default function Home() {
 
             {/* CTA */}
             <div className="text-center">
-              <Link href="/testimonials" className="btn border-2" style={{ borderColor: 'var(--color-primary)', color: 'var(--color-primary)' }}>
+              <Link href="/testimonials" className="btn border-2 border-primary primary-color">
                 Read All Testimonials
               </Link>
             </div>
@@ -74,15 +74,15 @@ export default function Home() {
       )}
 
       {/* CTA Section */}
-      <section className="py-20" style={{ backgroundColor: 'var(--color-primary)', color: 'white' }}>
+      <section className="py-20 bg-primary text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-5xl font-bold mb-6" style={{ fontFamily: 'var(--font-display)' }}>
+          <h2 className="text-5xl font-bold mb-6">
             Ready to Get Started?
           </h2>
           <p className="text-xl mb-10 opacity-90">
             Contact us today for a consultation
           </p>
-          <Link href="/contact" className="inline-block btn btn-solid text-white px-10 py-4 text-lg" style={{ backgroundColor: 'white', color: 'var(--color-primary)', borderColor: 'white' }}>
+          <Link href="/contact" className="inline-block btn text-white px-10 py-4 text-lg" style={{ backgroundColor: 'white', color: 'var(--color-primary)', borderColor: 'white' }}>
             Contact Us
           </Link>
         </div>
